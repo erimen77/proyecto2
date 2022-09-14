@@ -1,116 +1,139 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
+import React, { Component } from "react";
+import { FlatList, StyleSheet, Switch, TouchableHighlight, View, Image } from "react-native";
+import { Modal, Portal, Text, Button, Provider } from 'react-native-paper';
 
-import React from 'react';
-import type {Node} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { 
+      count: 0,
+      data:[],
+      loading: false,
+      url: 'https://randomuser.me/api?results=9',
+      prev: null,
+      next: null,
+      isEnabled: false,
+    };
+  }
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+  componentDidMount() {
+    this.getData();
+  }
 
-/* $FlowFixMe[missing-local-annot] The type annotation(s) required by Flow's
- * LTI update could not be added via codemod */
-const Section = ({children, title}): Node => {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-};
-
-const App: () => Node = () => {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+  toggleSwitch = async() => { 
+    const ise = this.state.isEnabled;
+    this.setState({isEnabled: !ise})
   };
 
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.js</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
+
+  getData = async() => {
+    this.setState({loading: true});
+    const reponse = await fetch(this.state.url);
+    const json = await reponse.json();
+   const prev = json.previous;
+    const next = json.next;
+    this.setState({
+      data: json.results,
+      loading: false
+    });
+  }
+  render() {
+
+    if(this.state.loading) {
+      return (
+        <View style={styles.container}>
+        <View style={[styles.countContainer]}>
+          <Text style={[styles.countText]}>
+            Iniciando las Tarjeta
+          </Text>
         </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
-};
+      </View>
+      );
+    }
+
+
+    return (
+      <View>
+        <View style={styles.header}>
+        <Text> Horizontal</Text>
+        <Switch
+          trackColor={{ false: "#767577", true: "#81b0ff" }}
+          thumbColor={this.state.isEnabled ? "#f5dd4b" : "#f4f3f4"}
+          ios_backgroundColor="#114e3f"
+          onValueChange={ () => { 
+            this.setState({isEnabled: !this.state.isEnabled})
+          }}
+          value={this.state.isEnabled}
+      
+        />
+        </View>
+        <View>
+        <View style={[styles.countContainer]}>
+          <Text>Escoje tu Tarjeta</Text>
+          <FlatList
+            horizontal={this.state.isEnabled ? true : false}
+            animated={true}
+            data={this.state.data}
+            keyExtractor={(x,i)=> i}
+            renderItem={({item})=>
+            <View style={styles.contenedor}>
+              <Text>{item.name.first}</Text>
+              <Text>{item.name.last}</Text>
+              <Image
+                style={styles.logo}
+                source={{uri: item.picture.large}}
+              />
+              <Text>{item.email}</Text>
+              <Button icon="camera" mode="contained" onPress={() => this.showModal(item.url)}>
+									Detalle
+							</Button>
+            </View>}
+          />
+        </View>
+      </View>
+      </View>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    paddingHorizontal: 10,
   },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
+  button: {
+    alignItems: "center",
+    backgroundColor: "#DDDDDD",
+    padding: 10
   },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
+  countContainer: {
+    alignItems: "center",
+    padding: 10
   },
-  highlight: {
-    fontWeight: '700',
+  countText: {
+    color: "red"
+  },
+  tinyLogo: {
+    width: 50,
+    height: 50,
+  },
+  logo: {
+    width: 200,
+    height: 200,
+    alignItems: "center",
+  },
+  contenedor: {
+    width: 300,
+    height: 450,
+    backgroundColor: '#AA8829',
+    marginLeft: 5,
+  },
+  header: {
+    justifyContent: "center",
+    paddingHorizontal: 50,
+    paddingVertical: 50,
+    right: 40,
   },
 });
 
