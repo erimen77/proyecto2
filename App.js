@@ -129,7 +129,7 @@ class App extends Component {
         //<View style={styles.container}>
         <View style={[styles.countContainer]}>
           <Text style={[styles.countText]}>
-          Cargando ...........
+          Cargando ...x........
           </Text>
         </View>
       //</View>
