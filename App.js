@@ -3,7 +3,7 @@ import  { Component } from "react";
 //import * as React from 'react';
 import {  FlatList, StyleSheet, Text, Switch, 
 	View, Image} from "react-native";
-import Bajar from "./src/components/Bajar";
+//import Bajar from "./src/components/Bajar";
 const REMOTE_IMAGE_PATH = 'https://usip.edu.bo/wp-content/uploads/2021/09/usip-marca.png'; 
 class App extends Component {
   constructor(props) {
@@ -86,23 +86,6 @@ class App extends Component {
         <View>
         <View style={[styles.countContainer]}>
           <Text>Listado</Text>
-          <FlatList
-            horizontal={this.state.isEnabled ? true : false}
-            animated={true}
-            data={this.state.data}
-            keyExtractor={(x,i)=> i}
-            renderItem={({item})=>
-			<View style={styles.contenedor}>
-              <Text>{item.strCategory}</Text>
-			  <Image
-                style={styles.logo}
-                source={{uri: item.strCategoryThumb}}
-				/>
-				<Bajar archivo={item.strCategoryThumb}
-				/>				
-              </View>
-              }
-           />
         </View>
       </View>
       </View>
