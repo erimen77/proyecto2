@@ -4,10 +4,10 @@ import {  FlatList, StyleSheet, Text, Switch,
 	View, Image, Linking,  Button} from "react-native";
 //import { Button } from "react-native-paper";
 import Bajar from "./Bajar";
-const REMOTE_IMAGE_PATH = 'https://informatica.uatf.edu.bo/rest/src/logo2.jpg'; 
+const REMOTE_IMAGE_PATH = 'https://informatica.uatf.edu.bo/rest/src/logo3.jpg'; 
 
 
-class Imprimir2 extends Component {
+class Imprimir3 extends Component {
   constructor(props) {
     super(props);
     this.state = { 
@@ -16,7 +16,7 @@ class Imprimir2 extends Component {
       loading: false,
       //url: 'https://randomuser.me/api?results=6',
 //	  url: 'https://pokeapi.co/api/v2/pokemon',
-	  url: 'https://informatica.uatf.edu.bo/rest/post2.php',
+	  url: 'https://informatica.uatf.edu.bo/rest/post3.php',
       prev: null,
       next: null,
       isEnabled: false,
@@ -77,10 +77,10 @@ class Imprimir2 extends Component {
           width: '100%',
           height: 200,
           //resizeMode: 'contain',
-          margin: 0
+          margin: 1
         }}
       />
-        <Text>Proyecto</Text>
+        <Text>Puede Visualizar las tarjetas en sentido horizontal o vertical</Text>
         <Switch
           trackColor={{ false: "#767577", true: "#81b0ff" }}
           thumbColor={this.state.isEnabled ? "#f5dd4b" : "#f4f3f4"}
@@ -93,7 +93,7 @@ class Imprimir2 extends Component {
         </View>
         <View>
         <View style={[styles.countContainer]}>
-          <Text>-- Elija --</Text>
+          {/*<Text>-- Elija --</Text>*/}
           <FlatList
             horizontal={this.state.isEnabled ? true : false}
             animated={true}
@@ -124,6 +124,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     paddingHorizontal: 10,
+    
   },
   button: {
     alignItems: "center",
@@ -133,7 +134,7 @@ const styles = StyleSheet.create({
   countContainer: {
     alignItems: "center",
     padding: 10,
-    backgroundColor:"#77DD77",
+    backgroundColor: "#E7004B",
   },
   countText: {
     color: "red"
@@ -161,4 +162,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Imprimir2;
+export default Imprimir3;

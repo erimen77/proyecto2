@@ -4,7 +4,7 @@ import {  FlatList, StyleSheet, Text, Switch,
 	View, Image, Linking,  Button} from "react-native";
 //import { Button } from "react-native-paper";
 import Bajar from "./Bajar";
-const REMOTE_IMAGE_PATH = 'https://usip.edu.bo/wp-content/uploads/2021/09/usip-marca.png'; 
+const REMOTE_IMAGE_PATH = 'https://informatica.uatf.edu.bo/rest/src/logo1.jpg'; 
 
 
 class Imprimir extends Component {
@@ -75,9 +75,9 @@ class Imprimir extends Component {
         }}
         style={{
           width: '100%',
-          height: 100,
-          resizeMode: 'contain',
-          margin: 5
+          height: 200,
+         // resizeMode: 'contain',
+          margin: 0
         }}
       />
         <Text>Proyecto</Text>
@@ -132,6 +132,7 @@ const styles = StyleSheet.create({
   },
   countContainer: {
     alignItems: "center",
+    backgroundColor: "#FFDA9E",
     padding: 10
   },
   countText: {
@@ -150,13 +151,13 @@ const styles = StyleSheet.create({
     width: 300,
     height: 450,
     backgroundColor: '#AADE29',
-    marginLeft: 5,
+    marginLeft: 0,
   },
   header: {
     justifyContent: "center",
-    paddingHorizontal: 50,
-    paddingVertical: 50,
-    right: 40,
+    paddingHorizontal: 0,
+    paddingVertical: 0,
+    right: 0,
   },
 });
 
