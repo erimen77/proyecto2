@@ -6,7 +6,7 @@ const Tarjeta2 = () => {
   return (
     <View>
       <Imprimir2/> 
-      <Text>HomeScreen2</Text>
+     {/* <Text>HomeScreen2</Text>*/}
     </View>
   )
 }

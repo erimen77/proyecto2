@@ -81,6 +81,7 @@ class Imprimir extends Component {
         }}
       />
         <Text style={styles.Texto1}>Puede Visualizar las tarjetas en sentido horizontal o vertical</Text>
+        <View style={styles.centro}>
         <Switch
           trackColor={{ false: "#767577", true: "#81b0ff" }}
           thumbColor={this.state.isEnabled ? "#f5dd4b" : "#f4f3f4"}
@@ -90,6 +91,7 @@ class Imprimir extends Component {
           }}
           value={this.state.isEnabled}
         />
+        </View>
         </View>
         <View>
         <View style={[styles.countContainer]}>
@@ -121,7 +123,9 @@ class Imprimir extends Component {
 }
 
 const styles = StyleSheet.create({
-  centro: { justifyContent: 'center' },
+  centro: { justifyContent: 'center' ,
+  backgroundColor: "#FFDA9E" 
+},
   botoncito: { height: 90,
   },
   container: {
@@ -150,6 +154,7 @@ const styles = StyleSheet.create({
     color: "#FFFFFF",
     fontSize: 14,
     fontWeight: '900',
+    backgroundColor: "#FFDA9E" 
   },
   Texto3: {
     //paddingLeft:5,}

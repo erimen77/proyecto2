@@ -77,7 +77,7 @@ class Imprimir3 extends Component {
           width: '100%',
           height: 200,
           //resizeMode: 'contain',
-          margin: 1
+          margin: 0
         }}
       />
         <Text style={styles.Texto1}>Puede Visualizar las tarjetas en sentido horizontal o vertical</Text>

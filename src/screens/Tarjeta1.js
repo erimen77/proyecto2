@@ -9,7 +9,7 @@ const Tarjeta1 = () => {
   return (
     <View>
    <Imprimir/> 
-      <Text>Tarjeta 1</Text> 
+     {/*  <Text>Tarjeta 1</Text> */}
       
     </View>
   )

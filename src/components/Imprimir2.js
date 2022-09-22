@@ -81,6 +81,7 @@ class Imprimir2 extends Component {
         }}
       />
        <Text style={styles.Texto1}>Puede Visualizar las tarjetas en sentido horizontal o vertical</Text>
+       <View style={styles.centro}>
         <Switch
           trackColor={{ false: "#767577", true: "#81b0ff" }}
           thumbColor={this.state.isEnabled ? "#f5dd4b" : "#f4f3f4"}
@@ -91,9 +92,10 @@ class Imprimir2 extends Component {
           value={this.state.isEnabled}
         />
         </View>
+        </View>
         <View>
         <View style={[styles.countContainer]}>
-        <Text style={styles.Texto2}> Descargue la tarjeta que desee</Text>
+         <Text style={styles.Texto2}> Descargue la tarjeta que desee</Text>
           <FlatList
             horizontal={this.state.isEnabled ? true : false}
             animated={true}
@@ -121,7 +123,9 @@ class Imprimir2 extends Component {
 }
 
 const styles = StyleSheet.create({
-  centro: { justifyContent: 'center' },
+  centro: { justifyContent: 'center',
+  backgroundColor: "#77DD77" 
+ },
   botoncito: { height: 90,
   },
   container: {
@@ -150,6 +154,7 @@ const styles = StyleSheet.create({
     color: "#FFFFFF",
     fontSize: 14,
     fontWeight: '900',
+    backgroundColor: "#77DD77",
   },
   Texto3: {
     //paddingLeft:5,}

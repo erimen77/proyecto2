@@ -95,7 +95,7 @@ const Bajar = (props) => {
         console.log(image_URL);
         // Showing alert after successful downloading
         console.log('res -> ', JSON.stringify(res));
-        alert('Image Downloaded Successfully.');
+        alert('Se descargara esta imagen en su dispositivo....');
       });
   };
  
