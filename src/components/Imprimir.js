@@ -80,7 +80,7 @@ class Imprimir extends Component {
           margin: 0
         }}
       />
-        <Text>Proyecto</Text>
+        <Text style={styles.Texto1}>Puede Visualizar las tarjetas en sentido horizontal o vertical</Text>
         <Switch
           trackColor={{ false: "#767577", true: "#81b0ff" }}
           thumbColor={this.state.isEnabled ? "#f5dd4b" : "#f4f3f4"}
@@ -93,7 +93,7 @@ class Imprimir extends Component {
         </View>
         <View>
         <View style={[styles.countContainer]}>
-          <Text>-- Elija --</Text>
+        <Text style={styles.Texto2}> Descargue la tarjeta que desee</Text>
           <FlatList
             horizontal={this.state.isEnabled ? true : false}
             animated={true}
@@ -101,13 +101,14 @@ class Imprimir extends Component {
             keyExtractor={(x,i)=> i}
             renderItem={({item})=>
 			<View style={styles.contenedor}>
-              <Text>{item.titulo}</Text>
+              <Text style={styles.Texto3}>{item.titulo}</Text>
 			  <Image
                 style={styles.logo}
                 source={{uri: item.strCategoryThumb}}
 
 				/>
 				<Bajar archivo={item.strCategoryThumb}
+           style={styles.botoncito}
 				/>				
               </View>
               }
@@ -120,23 +121,51 @@ class Imprimir extends Component {
 }
 
 const styles = StyleSheet.create({
+  centro: { justifyContent: 'center' },
+  botoncito: { height: 90,
+  },
   container: {
     flex: 1,
     justifyContent: "center",
     paddingHorizontal: 10,
+    
   },
   button: {
-    alignItems: "center",
-    backgroundColor: "#DDDDDD",
-    padding: 10
-  },
-  countContainer: {
     alignItems: "center",
     backgroundColor: "#FFDA9E",
     padding: 10
   },
+  countContainer: {
+    alignItems: "center",
+    padding: 10,
+    backgroundColor: "#FFDA9E",
+  },
   countText: {
     color: "red"
+  },
+  Texto1: {
+    paddingRight:8,
+    //alignContents: "center",
+    textAlign: "right",
+    color: "#FFFFFF",
+    fontSize: 14,
+    fontWeight: '900',
+  },
+  Texto3: {
+    //paddingLeft:5,}
+    //alignContents: "center",
+    textAlign: "center",
+    color: "#FFFFFF",
+    fontSize: 20,
+    fontWeight: '900',
+  },
+  Texto2: {
+    //alignItems: "center",
+    textAlign: "right",
+//    paddingLeft:5,
+    color: "#FFFFFF",
+    fontSize: 18,
+    fontWeight: '700',
   },
   tinyLogo: {
     width: 50,
@@ -144,13 +173,13 @@ const styles = StyleSheet.create({
 	alignContent:'center',
   },
   logo: {
-    width: 250,
-    height: 150,
+    width: "100%",
+    height: 140,
   },
   contenedor: {
-    width: 300,
-    height: 450,
-    backgroundColor: '#AADE29',
+    width: "100%",
+    height: 250,
+    backgroundColor: '#FFDA9E',
     marginLeft: 0,
   },
   header: {
@@ -158,6 +187,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 0,
     paddingVertical: 0,
     right: 0,
+    
   },
 });
 

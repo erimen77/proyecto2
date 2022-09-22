@@ -80,7 +80,8 @@ class Imprimir3 extends Component {
           margin: 1
         }}
       />
-        <Text>Puede Visualizar las tarjetas en sentido horizontal o vertical</Text>
+        <Text style={styles.Texto1}>Puede Visualizar las tarjetas en sentido horizontal o vertical</Text>
+        <View style={styles.centro}>
         <Switch
           trackColor={{ false: "#767577", true: "#81b0ff" }}
           thumbColor={this.state.isEnabled ? "#f5dd4b" : "#f4f3f4"}
@@ -91,9 +92,10 @@ class Imprimir3 extends Component {
           value={this.state.isEnabled}
         />
         </View>
+        </View>
         <View>
         <View style={[styles.countContainer]}>
-          {/*<Text>-- Elija --</Text>*/}
+          <Text style={styles.Texto2}> Descargue la tarjeta que desee</Text>
           <FlatList
             horizontal={this.state.isEnabled ? true : false}
             animated={true}
@@ -101,13 +103,14 @@ class Imprimir3 extends Component {
             keyExtractor={(x,i)=> i}
             renderItem={({item})=>
 			<View style={styles.contenedor}>
-              <Text>{item.titulo}</Text>
+              <Text style={styles.Texto3} >{item.titulo}</Text>
 			  <Image
                 style={styles.logo}
                 source={{uri: item.strCategoryThumb}}
 
 				/>
-				<Bajar archivo={item.strCategoryThumb}
+				<Bajar  archivo={item.strCategoryThumb}
+         style={styles.botoncito}
 				/>				
               </View>
               }
@@ -120,6 +123,9 @@ class Imprimir3 extends Component {
 }
 
 const styles = StyleSheet.create({
+  centro: { justifyContent: 'center' },
+  botoncito: { height: 90,
+  },
   container: {
     flex: 1,
     justifyContent: "center",
@@ -128,7 +134,7 @@ const styles = StyleSheet.create({
   },
   button: {
     alignItems: "center",
-    backgroundColor: "#DDDDDD",
+    backgroundColor: "#E7004B",
     padding: 10
   },
   countContainer: {
@@ -139,26 +145,51 @@ const styles = StyleSheet.create({
   countText: {
     color: "red"
   },
+  Texto1: {
+    paddingRight:8,
+    //alignContents: "center",
+    textAlign: "right",
+    color: "#FFFFFF",
+    fontSize: 14,
+    fontWeight: '900',
+  },
+  Texto3: {
+    //paddingLeft:5,}
+    //alignContents: "center",
+    textAlign: "center",
+    color: "#FFFFFF",
+    fontSize: 20,
+    fontWeight: '900',
+  },
+  Texto2: {
+    //alignItems: "center",
+    textAlign: "right",
+//    paddingLeft:5,
+    color: "#FFFFFF",
+    fontSize: 18,
+    fontWeight: '700',
+  },
   tinyLogo: {
     width: 50,
     height: 50,
 	alignContent:'center',
   },
   logo: {
-    width: 250,
-    height: 150,
+    width: "100%",
+    height: 140,
   },
   contenedor: {
-    width: 300,
-    height: 450,
-    backgroundColor: '#AADE29',
-    marginLeft: 5,
+    width: "100%",
+    height: 250,
+    backgroundColor: '#E7004B',
+    marginLeft: 0,
   },
   header: {
     justifyContent: "center",
     paddingHorizontal: 0,
     paddingVertical: 0,
     right: 0,
+    
   },
 });
 

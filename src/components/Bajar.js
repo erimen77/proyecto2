@@ -2,7 +2,11 @@
 // https://aboutreact.com/download-image-in-react-native/
  
 // Import React
-import React from 'react';
+
+
+
+
+import React , { useState } from 'react';
  
 // Import Required Components
 import {
@@ -12,11 +16,14 @@ import {
   TouchableOpacity,
   PermissionsAndroid,
   Platform,
+  Alert, Modal,
+  Pressable
 } from 'react-native';
  
 // Import RNFetchBlob for the file download
 import RNFetchBlob from 'rn-fetch-blob';
 
+import Icon from 'react-native-vector-icons/FontAwesome';
 const Bajar = (props) => {
   console.log(props)
   
@@ -98,22 +105,39 @@ const Bajar = (props) => {
              /[^.]+$/.exec(filename) : undefined;
   };
  
+  const [modalVisible, setModalVisible] = useState(false);
+
   return (
     <View style={styles.container}>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={()=>{
-          const REMOTE_IMAGE_PATH_X=props.archivo;
-          downloadImage(REMOTE_IMAGE_PATH_X);
-          //console.log(REMOTE_IMAGE_PATH_X)
-        }}          >
-        <Text style={styles.text}>
-          {props.archivo}
-        </Text>
-      </TouchableOpacity>
+
+    
+   
+
+
+
+
+
+        <Icon.Button
+              name="cloud-download"
+              backgroundColor="#3b5998"
+              color="#ffffff"
+            
+              onPress={()=>{
+                const REMOTE_IMAGE_PATH_X=props.archivo;
+                downloadImage(REMOTE_IMAGE_PATH_X);
+                //console.log(REMOTE_IMAGE_PATH_X)
+              }}  
+
+
+             // onPress={() => setModalVisible(!modalVisible)}
+              >
+              BAJAR ARCHIVO
+        </Icon.Button>
+
     </View>
   );
 };
+
  
 export default Bajar;
  
@@ -135,5 +159,48 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     padding: 5,
+  },
+  
+  botones:{
+    width:"100%",
+    flexDirection:"row"
+
+  },
+  touchable:{
+    flex:1,
+    paddingVertical:10,
+    alignItems:"center",
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5
+  },
+  button: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2
+  },
+  buttonOpen: {
+    backgroundColor: "#F194FF",
+  },
+  buttonClose: {
+    backgroundColor: "#2196F3",
   },
 });
