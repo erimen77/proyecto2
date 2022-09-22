@@ -110,6 +110,7 @@ class Imprimir extends Component {
 
 				/>
 				<Bajar archivo={item.strCategoryThumb}
+            descrip={item.descripcion}
            style={styles.botoncito}
 				/>				
               </View>

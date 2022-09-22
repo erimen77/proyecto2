@@ -1,11 +1,3 @@
-// How to Download an Image in React Native from any URL
-// https://aboutreact.com/download-image-in-react-native/
- 
-// Import React
-
-
-
-
 import React , { useState } from 'react';
  
 // Import Required Components
@@ -17,15 +9,24 @@ import {
   PermissionsAndroid,
   Platform,
   Alert, Modal,
-  Pressable
+  Pressable,
+  Dimensions,
+  TextInput,
+  Linking
 } from 'react-native';
  
 // Import RNFetchBlob for the file download
 import RNFetchBlob from 'rn-fetch-blob';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
+const WIDTH=Dimensions.get('window').width;
+const HEIGTH_MODAL =150;
+
 const Bajar = (props) => {
-  console.log(props)
+  console.log("+++++++++++++++++++")
+  console.log(props.archivo)
+  console.log(props.descrip)
+  console.log("+++++++++++++++++++")
   
   const checkPermission = async () => {
     
@@ -40,9 +41,9 @@ const Bajar = (props) => {
         const granted = await PermissionsAndroid.request(
           PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
           {
-            title: 'Storage Permission Required',
+            title: 'Se requiere permiso para el almacenamiento',
             message:
-              'App needs access to your storage to download Photos',
+              'La App necesita acceso al almacenamiento del dispositivo para descargar la imagen..',
           }
         );
         if (granted === PermissionsAndroid.RESULTS.GRANTED) {
@@ -51,7 +52,7 @@ const Bajar = (props) => {
           downloadImage();
         } else {
           // If permission denied then show alert
-          alert('Storage Permission Not Granted');
+          alert('Permiso de almacenamiento no concedido..');
         }
       } catch (err) {
         // To handle permission related exception
@@ -95,7 +96,7 @@ const Bajar = (props) => {
         console.log(image_URL);
         // Showing alert after successful downloading
         console.log('res -> ', JSON.stringify(res));
-        alert('Se descargara esta imagen en su dispositivo....');
+        alert('Imagen descargada suficientemente.');
       });
   };
  
@@ -106,33 +107,107 @@ const Bajar = (props) => {
   };
  
   const [modalVisible, setModalVisible] = useState(false);
+  const [noCelular, setnoCelular] = useState('');
+  
+  
+  const mandarImagen = async (imagen,descrip) =>{
+    const mensaje="https://wa.me/" + noCelular + "?text=" + imagen + "  " + descrip;
+    
+    console.log(mensaje);
+    setModalVisible(false);
+    
+    await Linking.openURL(mensaje)
+  }
 
   return (
     <View style={styles.container}>
 
-    
-   
+
+<Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          Alert.alert("Modal has been closed.");
+          setModalVisible(!modalVisible);
+        }}
+      >
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Text style={styles.modalText}>MANDA LA TARJETA AL NUMERO DE WHATSAPP DE TU PERSONA ESPECIAL</Text>
 
 
+            <View style={styles.input}>
+              <View style={{alignItems:'flex-start'}}>
+              <TextInput style={{fontSize: 24}} placeholder="+591------"
+                  onChangeText={(val)=>setnoCelular(val)}              
+              />
+                 
+            </View>    
+             </View>
+         <Text style={styles.desc}>
+          {props.descrip}
+         </Text>
 
+             <View style={styles.botones}>
+               <TouchableOpacity 
+                     styles={styles.touchable}
+                     onPress={() => setModalVisible(!modalVisible)}
+                >
+                  <Text style={[styles.text]}>
+                      Cancel
+                  </Text>
+               </TouchableOpacity>
+               <TouchableOpacity 
+                     styles={styles.touchable}
+                    /*  onPress={() => setModalVisible(!modalVisible)} */
+                    onPress={()=>{
+                      const REMOTE_IMAGE_PATH_X=props.archivo;
+                      mandarImagen(REMOTE_IMAGE_PATH_X,props.descrip);
+                      //console.log(REMOTE_IMAGE_PATH_X)
+                    }} 
 
+                >
+                  <Text style={[styles.text]}>
+                      ok
+                  </Text>
+               </TouchableOpacity>
+              
+              </View> 
+           
+          </View>
+        </View>
+      </Modal>
 
         <Icon.Button
               name="cloud-download"
               backgroundColor="#3b5998"
               color="#ffffff"
             
-              onPress={()=>{
+               onPress={()=>{
                 const REMOTE_IMAGE_PATH_X=props.archivo;
                 downloadImage(REMOTE_IMAGE_PATH_X);
                 //console.log(REMOTE_IMAGE_PATH_X)
-              }}  
+              }}
 
 
-             // onPress={() => setModalVisible(!modalVisible)}
+             /*  onPress={() => setModalVisible(!modalVisible)} */
               >
               BAJAR ARCHIVO
         </Icon.Button>
+        <View style={{marginTop: 2}}>
+
+        
+        <Icon.Button
+              name="whatsapp"
+              backgroundColor="#3b5998"
+              color="#ffffff"
+             onPress={() => setModalVisible(!modalVisible)}
+             
+              >
+              MANDAR POR WHATSAPP
+        </Icon.Button>
+        </View>
 
     </View>
   );
@@ -142,6 +217,14 @@ const Bajar = (props) => {
 export default Bajar;
  
 const styles = StyleSheet.create({
+  modalText: { color:'#E7004B',
+fontWeight:'bold',
+  textAlign:'center',
+  },
+  desc: {
+    fontSize: 20,
+    color: "#0059B2",
+  },
   container: {
     flex: 1,
     justifyContent: 'center',
@@ -155,27 +238,38 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   text: { 
-    color: '#fff',
+    /* color: '#fff',
     fontSize: 20,
     textAlign: 'center',
-    padding: 5,
+    padding: 5, */
+    margin:5,
+    fontsize:25,
+    fontWeight:"bold",
+    backgroundColor: '#E7004B',
+    padding:25,
+    color: '#fff',
+    borderRadius:10,
+
   },
   
   botones:{
     width:"100%",
-    flexDirection:"row"
+    flexDirection:"row",
+   // backgroundColor: 'orange',
+    //justifyContent: 'space-around',
 
   },
   touchable:{
     flex:1,
     paddingVertical:10,
-    alignItems:"center",
+    //alignItems:"center",
+    justifyContent: 'space-around'
   },
   centeredView: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 22
+    marginTop: 1
   },
   modalView: {
     margin: 20,
@@ -202,5 +296,27 @@ const styles = StyleSheet.create({
   },
   buttonClose: {
     backgroundColor: "#2196F3",
+  },
+  modal:{
+    flex:1,
+    height:HEIGTH_MODAL,
+    width: WIDTH-10,
+    backgroundColor: "white",
+    borderRadius:10,
+    paddingTop:20,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  input: {
+    marginTop: 20,
+    width: 200,
+    borderColor: 'black',
+    borderWidth: 2,
+    height: 50,
+    borderRadius: 5,
+    justifyContent: 'center',
+    //alignItems: 'flex-end',
+    paddingRight: 10,
+    backgroundColor: '#73B9FF',
   },
 });
