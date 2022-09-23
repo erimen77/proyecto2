@@ -121,12 +121,13 @@ class Imprimir2 extends Component {
       </View>
     );
   }
+  
 }
 
 const styles = StyleSheet.create({
   fas:{
     width: '90%',
-    height:500
+    height:430
   },
   centro: { justifyContent: 'center',
   backgroundColor: "#77DD77" 
