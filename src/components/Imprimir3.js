@@ -126,7 +126,7 @@ class Imprimir3 extends Component {
 const styles = StyleSheet.create({
   fas:{
     width: '90%',
-    height:400
+    height:500
   },
   centro: { justifyContent: 'center' },
   botoncito: { height: 90,
