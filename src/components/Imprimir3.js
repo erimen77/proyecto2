@@ -96,23 +96,23 @@ class Imprimir3 extends Component {
         <View>
         <View style={[styles.countContainer]}>
           <Text style={styles.Texto2}> Descargue la tarjeta que desee</Text>
-          <FlatList
-            horizontal={this.state.isEnabled ? true : false}
-            animated={true}
-            data={this.state.data}
-            keyExtractor={(x,i)=> i}
-            renderItem={({item})=>
-			<View style={styles.contenedor}>
-              <Text style={styles.Texto3} >{item.titulo}</Text>
-			  <Image
-                style={styles.logo}
-                source={{uri: item.strCategoryThumb}}
+          <FlatList style={[styles.fas]}
+              horizontal={this.state.isEnabled ? true : false}
+              animated={true}
+              data={this.state.data}
+              keyExtractor={(x,i)=> i}
+              renderItem={({item})=>
+			        <View style={styles.contenedor}>
+                  <Text style={styles.Texto3} >{item.titulo}</Text>
+			            <Image
+                     style={styles.logo}
+                    source={{uri: item.strCategoryThumb}}
 
-				/>
-				<Bajar  archivo={item.strCategoryThumb}
-        descrip={item.descripcion}
-         style={styles.botoncito}
-				/>				
+				          />
+				          <Bajar  archivo={item.strCategoryThumb}
+                  descrip={item.descripcion}
+                  style={styles.botoncito}
+				          />				
               </View>
               }
            />
@@ -124,6 +124,10 @@ class Imprimir3 extends Component {
 }
 
 const styles = StyleSheet.create({
+  fas:{
+    width: '90%',
+    height:400
+  },
   centro: { justifyContent: 'center' },
   botoncito: { height: 90,
   },

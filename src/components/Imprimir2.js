@@ -96,7 +96,7 @@ class Imprimir2 extends Component {
         <View>
         <View style={[styles.countContainer]}>
          <Text style={styles.Texto2}> Descargue la tarjeta que desee</Text>
-          <FlatList
+          <FlatList style={[styles.fas]}
             horizontal={this.state.isEnabled ? true : false}
             animated={true}
             data={this.state.data}
@@ -124,6 +124,10 @@ class Imprimir2 extends Component {
 }
 
 const styles = StyleSheet.create({
+  fas:{
+    width: '90%',
+    height:400
+  },
   centro: { justifyContent: 'center',
   backgroundColor: "#77DD77" 
  },
